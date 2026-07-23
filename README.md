@@ -69,7 +69,7 @@ Built with a **strict multi-tenant security architecture (`workspaceId` data iso
 ## ═══════════════════════════════════════
 
 - 🌐 **Live Vercel Deployment**: [https://project-loop-pink.vercel.app](https://project-loop-pink.vercel.app)
-- 🐙 **GitHub Repository**: [https://github.com/Pratikgopale03/project-loop](https://github.com/Pratikgopale03/project-loop)
+- 🐙 **GitHub Repository**: [https://github.com/Pratikgopale03/Project-Loop](https://github.com/Pratikgopale03/Project-Loop)
 - 📥 **Universal Incoming Webhook**: [https://project-loop-pink.vercel.app/api/webhooks/incoming](https://project-loop-pink.vercel.app/api/webhooks/incoming)
 
 ### Demo Credentials Table (Grading Checklist)
