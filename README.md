@@ -15,9 +15,9 @@ Built with a **strict multi-tenant security architecture (`workspaceId` data iso
 
 ### 💡 Core Business Problems & Quantitative Impact (% Metrics)
 
-1. ⚡ **Feedback Sprawl & Slow Triage (85% Faster Triaging)**:
+1. ⚡ **Feedback Sprawl & Fast Triaging (85% Reduced Triage Overhead)**:
    - *Problem*: Feedback is fragmented across 5+ channels (Slack, Support Tickets, Email, Twitter, Zomato, Swiggy, Amazon).
-   - *Solution*: Centralizes all feedback into a paginated feed with **1-click direct page jumping (`[1] [2] [3] ... [32]`)**, reducing triage overhead by **85%** (from 48 hours to **under 5 minutes**).
+   - *Solution*: Centralizes all feedback into an intelligent, searchable Inbox queue with live status workflows (NEW ➔ REVIEWED ➔ ACTIONED), reducing triage overhead by **85%** (from 48 hours to **under 5 minutes**).
 
 2. 🔴 **Unnoticed Churn Risk & Emergency Spikes (<2s Incident Detection)**:
    - *Problem*: High-value VIP enterprise accounts submitting critical complaints go unnoticed until contract renewal fails.
@@ -124,7 +124,7 @@ Open [http://localhost:3000](http://localhost:3000) to access the application lo
 1. ⚡ **Real-Time Automated Alert Rules**: Live database evaluators trigger immediate red workspace banners when >3 negative complaints occur within 1 hour or when VIP Pro accounts submit negative feedback.
 2. 🔔 **Slack & Discord Webhook Integration**: Configure custom incoming webhook URLs in Settings (`/settings`) to send real-time alert dispatches to team channels with floating toast feedback.
 3. 📥 **Universal Incoming Webhook Ingestion (`/api/webhooks/incoming`)**: Real-time webhook route accepting customer reviews from Zapier, Make.com, Twitter/X, Zomato, Swiggy, Uber, Amazon, App Store, or custom HTTP scripts.
-4. 🔢 **Fast Paginated Inbox & Direct Page Jumping**: Paginated feedback queue (5 items/page) with direct numeric page jump buttons (`[1] [2] [3] ... [32]`), live status updates (`NEW` ➔ `REVIEWED` ➔ `ACTIONED`), and individual item deletion.
+4. 📥 **Interactive Feedback Inbox & Triage Workflow**: Unified feedback queue supporting live status progression (`NEW` ➔ `REVIEWED` ➔ `ACTIONED`), channel filtering, item deletion, and bulk purging.
 5. 📊 **Feature Area vs. Sentiment CSAT Matrix**: Heatmap breakdown of customer satisfaction across product modules (Performance, UI Design, Bugs, General) with automated CSAT index scores (1.0–5.0) and letter grades (Grade A+ to F).
 6. 📈 **Theme Volume Surge & Spike Drilldown**: Real-time theme volume surge tracking (+50%), spiking flags, and interactive theme feedback drilldown logs with dark mode option styling.
 7. 🎯 **AI Churn Threat Prediction & Risk Scorecard**: Dynamic topic-specific Churn Risk assessment (68% to 96%) with 1-click tailored executive retention email response drafts.
