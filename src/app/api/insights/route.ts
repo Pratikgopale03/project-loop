@@ -4,6 +4,8 @@ import { vectorSearch } from "@/lib/search";
 import { answerQuestion } from "@/lib/ai";
 import * as zod from "zod";
 
+export const dynamic = "force-dynamic";
+
 const questionSchema = zod.object({
   question: zod.string().min(5, "Question must be at least 5 characters long"),
 });

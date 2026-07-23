@@ -5,6 +5,8 @@ import { classifyFeedback } from "@/lib/ai";
 import { generateEmbedding, saveEmbedding } from "@/lib/search";
 import * as zod from "zod";
 
+export const dynamic = "force-dynamic";
+
 const createFeedbackSchema = zod.object({
   content: zod.string().min(1, "Feedback content is required"),
   channel: zod.string().min(1, "Channel is required"),

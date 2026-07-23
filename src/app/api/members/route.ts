@@ -4,6 +4,8 @@ import { getSessionOrThrow, enforceRole } from "@/lib/auth";
 import bcrypt from "bcrypt";
 import * as zod from "zod";
 
+export const dynamic = "force-dynamic";
+
 const createMemberSchema = zod.object({
   name: zod.string().min(2, "Name must be at least 2 characters"),
   email: zod.string().email("Invalid email address"),

@@ -4,6 +4,8 @@ import { getSessionOrThrow } from "@/lib/auth";
 import { generateVocReport } from "@/lib/ai";
 import * as zod from "zod";
 
+export const dynamic = "force-dynamic";
+
 const createReportSchema = zod.object({
   title: zod.string().min(3, "Title must be at least 3 characters long"),
   periodStart: zod.string(),

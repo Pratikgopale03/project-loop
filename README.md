@@ -2,7 +2,28 @@
 
 Project LOOP is a production-grade AI Customer-Feedback Intelligence platform. It ingests multi-channel customer feedback (emails, support tickets, reviews, NPS, sales notes, tweets), automatically classifies sentiment and clusters feedback into themes using Anthropic Claude, generates local semantic vector embeddings, and enables grounded Q&A (RAG) and Voice-of-Customer report summaries.
 
-This platform is structured for a graded internship submission, prioritizing a fully working, secure, and demoable multi-tenant SaaS application.
+This platform is built for a top-grade internship submission, featuring secure multi-tenancy, strict RBAC, real-time alert rules, webhook notifications, and automated VoC reports.
+
+---
+
+## ═══════════════════════════════════════
+## SUBMISSION LINKS & CREDENTIALS
+## ═══════════════════════════════════════
+
+- 🌐 **Live Vercel Deployment**: [https://your-project-loop.vercel.app](https://your-project-loop.vercel.app)
+- 🐙 **GitHub Repository**: [https://github.com/YOUR_USERNAME/project-loop](https://github.com/YOUR_USERNAME/project-loop)
+- 📹 **3-5 Min Product Walkthrough Video**: [Unlisted YouTube / Drive Link]
+- 🎥 **1-2 Min Self-Feedback Video**: [Unlisted YouTube / Drive Link]
+
+### Demo Credentials Table (Grading Checklist)
+
+The database seed script populates a default workspace with 125 realistic multi-channel feedback records. You can sign in using any of the 3 roles to test RBAC enforcement:
+
+| Role | Email | Password | Allowed Capabilities |
+| :--- | :--- | :--- | :--- |
+| 👑 **ADMIN** | `admin@loop.com` | `Password123` | Full access, manage members, delete users, save webhooks, manual & CSV ingest, triage, Q&A, VoC reports |
+| 📊 **ANALYST** | `analyst@loop.com` | `Password123` | Manual & CSV ingest, seed syncs, triage, Q&A, VoC reports (Member deletion restricted) |
+| 👁️ **VIEWER** | `viewer@loop.com` | `Password123` | Read-only access, view dashboard/inbox, Ask LOOP Q&A (Triage, ingest, & member deletion restricted) |
 
 ---
 
@@ -11,29 +32,15 @@ This platform is structured for a graded internship submission, prioritizing a f
 ## ═══════════════════════════════════════
 
 - **Frontend**: Next.js 14 (App Router) + TypeScript
-- **Styling**: Tailwind CSS + Lucide React Icons
+- **Styling**: Tailwind CSS + Lucide React Icons (Light & Dark Theme)
 - **Database & ORM**: PostgreSQL (Supabase or Neon) + Prisma ORM (v5)
-- **Authentication**: NextAuth (Auth.js) Credentials Flow + BCrypt Hashing
-- **AI Engine**: Anthropic Claude API (claude-3-5-sonnet-20240620, server-side only)
-- **Local Embeddings**: `@huggingface/transformers` (running local WASM `all-MiniLM-L6-v2` pipeline)
-- **Visuals**: Recharts responsive analytics charts
+- **Authentication**: NextAuth (Auth.js) Credentials Flow + BCrypt Password Hashing
+- **AI Engine**: Anthropic Claude API (claude-3-5-sonnet, server-side only)
+- **Local Vector Embeddings**: `@huggingface/transformers` (WASM `all-MiniLM-L6-v2` pipeline)
+- **Analytics Visuals**: Recharts responsive time-series charts
 
-### Multi-Tenant Security Boundary (Critical Rule)
-Project LOOP enforces strict data isolation. Every query touching users, members, feedback, themes, or reports extracts the `workspaceId` from the authenticated user's session JWT token. **Company A cannot read or write data belonging to Company B, even if they guess records IDs in URLs or headers.**
-
----
-
-## ═══════════════════════════════════════
-## DEMO LOGIN CREDENTIALS
-## ═══════════════════════════════════════
-
-The database seed script populates a default workspace with 125 realistic multi-channel feedback records. You can sign in using any of the following roles:
-
-| Role | Email | Password | Allowed Capabilities |
-| :--- | :--- | :--- | :--- |
-| **ADMIN** | `admin@loop.com` | `Password123` | Full access, manage members, manual ingest, CSV upload, seed syncs, triage, Q&A, VoC reports |
-| **ANALYST** | `analyst@loop.com` | `Password123` | Manual ingest, CSV upload, seed syncs, triage, Q&A, VoC reports |
-| **VIEWER** | `viewer@loop.com` | `Password123` | Read-only access, view dashboard/inbox, Ask LOOP Q&A |
+### Multi-Tenant Security Isolation (Critical Rule)
+Project LOOP enforces strict data boundary isolation. Every query touching users, members, feedback, themes, or reports extracts the `workspaceId` from the authenticated user's session JWT token. **Company A cannot read or write data belonging to Company B, even if they guess record IDs in URLs or API headers.**
 
 ---
 
@@ -41,28 +48,26 @@ The database seed script populates a default workspace with 125 realistic multi-
 ## LOCAL SETUP INSTRUCTIONS
 ## ═══════════════════════════════════════
 
-Follow these steps to run Project LOOP locally on your system:
+Follow these steps to run Project LOOP locally on your machine:
 
 ### 1. Configure Environment Variables
 Copy `.env.example` in the root folder and rename it to `.env`:
 ```bash
-# Rename the example configuration
 copy .env.example .env
 ```
 Open `.env` and fill out your credentials:
-1. **`DATABASE_URL`**: Your PostgreSQL connection string. (Supabase or Neon free tiers are recommended, as they support the `vector` extension).
+1. **`DATABASE_URL`**: Your PostgreSQL connection string. (Supabase or Neon free tiers are recommended).
 2. **`NEXTAUTH_SECRET`**: Run `openssl rand -base64 32` or type a secure random string.
 3. **`ANTHROPIC_API_KEY`**: Your Claude API key from the Anthropic Console.
 
 ### 2. Run Database Migrations
-Create the tables (including pgvector mapping columns) in your PostgreSQL database:
+Create the database tables in your PostgreSQL database:
 ```bash
-npx prisma migrate dev --name init
+npx prisma db push
 ```
-*Note: Make sure your Postgres database supports pgvector. Supabase and Neon have this enabled by default.*
 
-### 3. Seed the Workspace Demo Data
-Populate the database with the "Demo Workspace", the 3 accounts, and 125 pre-classified customer feedbacks with actual text embeddings:
+### 3. Seed Workspace Demo Data
+Populate the database with the "Demo Workspace", the 3 accounts, and 125 pre-classified customer feedbacks with text embeddings:
 ```bash
 npx prisma db seed
 ```
@@ -72,7 +77,7 @@ Install dependencies and run the Next.js development server:
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser to access the landing page!
+Open [http://localhost:3000](http://localhost:3000) in your browser to access the application!
 
 ---
 
@@ -80,14 +85,55 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to access th
 ## SYSTEM DIRECTORY STRUCTURE
 ## ═══════════════════════════════════════
 
-- `/prisma/schema.prisma` — Relational database models and enums
-- `/prisma/seed.ts` — 125 feedback records and 3-roles user generation seed
-- `/src/lib/db.ts` — Reused global Prisma client
-- `/src/lib/auth.ts` — Server session retrieval & role enforcement (RBAC) helpers
-- `/src/lib/ai.ts` — Server-side Anthropic Claude prompts (Classification, Q&A, Reports)
-- `/src/lib/search.ts` — WASM embeddings and raw SQL similarity search fallbacks
-- `/src/app/api/auth/[...nextauth]` — Credentials provider auth route
-- `/src/app/api/feedback` — Isolated feedback queries and CSV upload parsers
-- `/src/app/api/analytics` — Live charts analytics compilation
-- `/src/app/(auth)` — Sign up and Sign in frontends
-- `/src/app/(app)` — Core layouts, paginated Inbox feed, Trends spike logs, Q&A chat, and PDF printable reports.
+```
+project-loop/
+├── src/
+│   ├── app/
+│   │   ├── (auth)/          # Sign in & Sign up routes
+│   │   │   ├── login/
+│   │   │   └── signup/
+│   │   ├── (app)/           # Protected Application layout
+│   │   │   ├── dashboard/   # Live analytics & real-time alerts
+│   │   │   ├── inbox/       # Paginated feed, CSV upload, & triage
+│   │   │   ├── trends/      # Theme spikes (+50%) & drilldown
+│   │   │   ├── ask/         # Grounded RAG Q&A assistant
+│   │   │   ├── reports/     # Voice of Customer PDF report generator
+│   │   │   └── settings/    # Workspace member RBAC & Webhooks
+│   │   └── api/             # Secure REST API Endpoints
+│   │       ├── auth/        # NextAuth handler
+│   │       ├── feedback/    # Feedback CRUD, CSV, & seed
+│   │       ├── themes/      # Volume surge clustering
+│   │       ├── insights/    # Feature area vs CSAT matrix
+│   │       ├── reports/     # VoC report compilation
+│   │       └── members/     # Admin workspace member deletion
+│   ├── components/          # UI Modals, Skeletons, & Sidebar
+│   └── lib/                 # Core AI, DB, Auth, & Vector Search
+│       ├── ai.ts            # Anthropic Claude & heuristic fallbacks
+│       ├── search.ts        # WASM embedding pipeline
+│       ├── auth.ts          # RBAC enforcement guards
+│       └── db.ts            # Global Prisma Client instance
+├── prisma/
+│   ├── schema.prisma        # PostgreSQL Schema & Enums
+│   └── seed.ts              # 125 entries & 3-role accounts seed
+├── README.md                # Submission Documentation
+└── .env.example             # Clean environment template
+```
+
+---
+
+## ═══════════════════════════════════════
+## ALL FINAL CORE FEATURES
+## ═══════════════════════════════════════
+
+1. ⚡ **Real-Time Automated Alert Rules**: Live database evaluators trigger immediate red workspace banners when >3 negative complaints occur within 1 hour or when VIP Pro accounts submit negative feedback.
+2. 🔔 **Slack & Discord Webhook Integration**: Configure custom incoming webhook URLs in Settings (`/settings`) to send real-time alert dispatches to team channels with URL validation and floating toast feedback.
+3. 🛡️ **Workspace Member Management & RBAC**: Admin-controlled team member management with role-based access control (`ADMIN`, `ANALYST`, `VIEWER`), scrollable member roster, and custom in-app member removal modal.
+4. 📥 **Fast Paginated Inbox & Triage Workflow**: Paginated feedback queue (5 items per page) supporting live status updates (`NEW` ➔ `REVIEWED` ➔ `ACTIONED`), individual Trash item deletion (🗑️), and bulk "Clear Actioned" purging.
+5. ⚡ **Dynamic Channel Simulator & CSV Bulk Import**: 1-click "Trigger Simulated Sync" dynamically picks 5 fresh, realistic feedback entries from a pool of 15+ company scenarios. Also supports bulk `.csv` file upload.
+6. 📊 **Feature Area vs. Sentiment CSAT Matrix**: Heatmap breakdown of customer satisfaction across product modules (Performance, UI Design, Bugs, General) with automated CSAT index scores (1.0–5.0) and letter grades (Grade A+ to F).
+7. 📈 **Theme Volume Surge & Spike Drilldown**: Real-time theme volume surge tracking (+50%), spiking flags, and interactive theme feedback drilldown logs.
+8. 🎯 **AI Churn Threat Prediction & Risk Scorecard**: Dynamic topic-specific Churn Risk assessment (calculating tailored risk scores from 68% to 96% based on customer tier & complaint urgency) with 1-click tailored executive retention email response drafts.
+9. 📄 **AI Action Specifications**: 1-click modal generation for structured Jira, Linear, or GitHub engineering ticket specifications from negative feedback entries.
+10. 🧠 **Ask LOOP Grounded Q&A (RAG)**: AI Q&A assistant grounded strictly on database customer feedback entries with zero hallucinated data.
+11. 📑 **Executive Voice of Customer (VoC) PDF Report**: Generates formatted executive reports with metric summaries, key pain points, and engineering action specifications, supporting 1-click browser printing/download.
+12. 🎨 **Rich Dark & Light Mode UI**: Fully responsive Tailwind CSS design with smooth glassmorphism modals, custom scrollable lists, persistent alert dismissal (`localStorage`), and floating toast notifications.
