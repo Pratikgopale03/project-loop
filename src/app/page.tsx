@@ -167,8 +167,8 @@ export default function LandingPage() {
             ? "bg-indigo-500/10 border-indigo-500/25 text-indigo-400" 
             : "bg-indigo-50 border-indigo-100 text-indigo-600 shadow-md shadow-indigo-100/50"
         }`}>
-          <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-ping" />
-          <span>Internship Submission Ready</span>
+          <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <span>Next-Gen AI Customer Feedback Engine v2.4</span>
         </div>
 
         {/* Hero Title */}
