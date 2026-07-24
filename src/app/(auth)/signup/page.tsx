@@ -187,9 +187,9 @@ export default function SignUpPage() {
                     : "bg-slate-50 border-slate-300 text-slate-900 focus:border-indigo-600 focus:ring-indigo-500/20"
                 }`}
               >
-                <option value="ADMIN" className="bg-slate-900 text-slate-100">👑 ADMIN (Full Control & Workspace Management)</option>
-                <option value="ANALYST" className="bg-slate-900 text-slate-100">📊 ANALYST (Ingest Data, Triage & AI Search)</option>
-                <option value="VIEWER" className="bg-slate-900 text-slate-100">👁️ VIEWER (Read-Only Mode & View Analytics)</option>
+                <option value="ADMIN" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">ADMIN</option>
+                <option value="ANALYST" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">ANALYST</option>
+                <option value="VIEWER" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">VIEWER</option>
               </select>
             </div>
 
