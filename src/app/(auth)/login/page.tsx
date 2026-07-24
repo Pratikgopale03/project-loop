@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Layers, Mail, Lock, Sparkles, ShieldCheck, UserCheck, Eye, ArrowRight } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -23,6 +23,12 @@ function LoginForm() {
       setSuccess("Account created successfully! Please log in.");
     }
   }, [searchParams]);
+
+  // Quick preset demo login
+  const handleQuickLogin = (email: string) => {
+    setFormData({ email, password: "Password123" });
+    setError("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,89 +57,170 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Floating Back to Home Badge */}
-      <Link 
-        href="/" 
-        className="absolute top-8 left-8 z-20 flex items-center gap-2 bg-slate-900/40 hover:bg-indigo-600/10 backdrop-blur-md border border-slate-800/60 hover:border-indigo-500/35 rounded-full px-4.5 py-2.5 text-xs font-bold text-slate-400 hover:text-indigo-400 transition-all duration-300 hover:-translate-x-1 shadow-lg hover:shadow-indigo-500/5 group active:scale-[0.98]"
-      >
-        <ArrowLeft className="h-3.5 w-3.5 text-indigo-400 group-hover:-translate-x-0.5 transition-transform" />
-        Back to Home
-      </Link>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 px-4 py-8 sm:px-6 lg:px-8 relative overflow-hidden text-slate-100 font-sans selection:bg-indigo-500 selection:text-white">
+      {/* Background Animated Grid Mesh & Radial Lights */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-950 to-slate-950 pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-indigo-600/10 via-purple-600/10 to-blue-600/5 rounded-full blur-[140px] pointer-events-none animate-pulse" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Decorative Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Top Floating Header */}
+      <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 bg-slate-900/60 hover:bg-slate-800/80 backdrop-blur-xl border border-slate-800/80 hover:border-indigo-500/40 rounded-full px-4 py-2 text-xs font-bold text-slate-300 hover:text-indigo-400 transition-all duration-300 shadow-xl group active:scale-95"
+        >
+          <ArrowLeft className="h-3.5 w-3.5 text-indigo-400 group-hover:-translate-x-0.5 transition-transform" />
+          Back to Home
+        </Link>
 
-      <div className="w-full max-w-md space-y-8 relative z-10">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold tracking-tight text-slate-100">
-            Sign in to Project LOOP
-          </h2>
-          <p className="mt-2 text-center text-xs text-slate-400">
-            AI Customer Feedback Intelligence Platform
-          </p>
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[11px] font-semibold text-indigo-300">
+          <Sparkles className="h-3.5 w-3.5 text-indigo-400 animate-spin-slow" />
+          Enterprise Multi-Tenant SaaS
         </div>
+      </div>
 
-        {error && (
-          <div className="rounded-xl bg-rose-500/10 border border-rose-500/20 p-4 text-xs text-rose-400 text-center font-medium animate-in fade-in duration-200">
-            {error}
-          </div>
-        )}
+      {/* Main Glassmorphic Auth Card */}
+      <div className="w-full max-w-md relative z-10 my-auto">
+        <div className="bg-slate-900/70 backdrop-blur-2xl border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-slate-950/80 relative overflow-hidden">
+          {/* Top Decorative Card Highlight Line */}
+          <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
 
-        {success && (
-          <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-xs text-emerald-400 text-center font-medium animate-in fade-in duration-200">
-            {success}
-          </div>
-        )}
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4 rounded-md shadow-sm">
-            <div>
-              <label className="block text-xs font-medium text-slate-400 mb-1">
-                Email address
-              </label>
-              <input
-                type="email"
-                required
-                disabled={loading}
-                className="w-full rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition"
-                placeholder="admin@loop.internal"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
+          {/* Logo & Header */}
+          <div className="text-center space-y-3">
+            <div className="inline-flex p-3 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-xl shadow-indigo-600/30 border border-indigo-400/30">
+              <Layers className="h-7 w-7" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-400 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                required
-                disabled={loading}
-                className="w-full rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              />
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                Project LOOP
+              </h1>
+              <p className="text-xs text-slate-400 font-medium mt-1">
+                AI Customer Feedback Intelligence Platform
+              </p>
             </div>
           </div>
 
-          <div>
+          {/* 1-Click Demo Account Quick Login Section */}
+          <div className="mt-6 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-2">
+            <div className="flex items-center justify-between px-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                <Sparkles className="h-3 w-3 text-amber-400" />
+                1-Click Demo Accounts
+              </span>
+              <span className="text-[10px] text-slate-500">Tap to auto-fill</span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => handleQuickLogin("admin@loop.com")}
+                className="flex flex-col items-center justify-center p-2 rounded-xl border border-purple-500/20 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 hover:border-purple-500/40 transition active:scale-95 group"
+              >
+                <ShieldCheck className="h-4 w-4 mb-1 text-purple-400 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] font-bold">ADMIN</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleQuickLogin("analyst@loop.com")}
+                className="flex flex-col items-center justify-center p-2 rounded-xl border border-indigo-500/20 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 hover:border-indigo-500/40 transition active:scale-95 group"
+              >
+                <UserCheck className="h-4 w-4 mb-1 text-indigo-400 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] font-bold">ANALYST</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleQuickLogin("viewer@loop.com")}
+                className="flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700/60 bg-slate-800/40 hover:bg-slate-800/80 text-slate-300 hover:border-slate-600 transition active:scale-95 group"
+              >
+                <Eye className="h-4 w-4 mb-1 text-slate-400 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] font-bold">VIEWER</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Feedback Banners */}
+          {error && (
+            <div className="mt-4 rounded-xl bg-rose-500/10 border border-rose-500/20 p-3 text-xs text-rose-400 text-center font-medium animate-in fade-in duration-200">
+              {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="mt-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-3 text-xs text-emerald-400 text-center font-medium animate-in fade-in duration-200">
+              {success}
+            </div>
+          )}
+
+          {/* Main Credentials Form */}
+          <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+            <div className="space-y-3.5">
+              <div>
+                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Work Email Address
+                </label>
+                <div className="relative">
+                  <Mail className="h-4 w-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type="email"
+                    required
+                    disabled={loading}
+                    className="w-full rounded-xl border border-slate-800 bg-slate-950/80 pl-10 pr-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all font-mono"
+                    placeholder="admin@loop.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="h-4 w-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type="password"
+                    required
+                    disabled={loading}
+                    className="w-full rounded-xl border border-slate-800 bg-slate-950/80 pl-10 pr-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all font-mono"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  />
+                </div>
+              </div>
+            </div>
+
             <button
               type="submit"
               disabled={loading}
-              className="group relative flex w-full justify-center rounded-xl bg-indigo-600 px-4 py-3.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 transition shadow-lg shadow-indigo-600/20"
+              className="mt-2 group relative flex w-full justify-center items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 px-4 py-3.5 text-sm font-bold text-white hover:from-indigo-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 transition-all duration-300 shadow-xl shadow-indigo-600/25 active:scale-[0.98]"
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? (
+                <span className="animate-pulse">Signing in...</span>
+              ) : (
+                <>
+                  Sign In to Workspace
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
-          </div>
-        </form>
+          </form>
 
-        <div className="text-center text-xs text-slate-500">
-          Don't have an account?{" "}
-          <Link href="/signup" className="font-semibold text-indigo-400 hover:text-indigo-300">
-            Register workspace
-          </Link>
+          <div className="mt-6 text-center text-xs text-slate-400 pt-2 border-t border-slate-800/80 flex items-center justify-between">
+            <span>New tenant workspace?</span>
+            <Link href="/signup" className="font-bold text-indigo-400 hover:text-indigo-300 transition">
+              Register Workspace &rarr;
+            </Link>
+          </div>
+        </div>
+
+        {/* Footer Credit & Badges */}
+        <div className="mt-6 text-center text-[11px] text-slate-500 space-y-1">
+          <p>Protected by PostgreSQL Row-Level Workspace Isolation</p>
+          <p className="text-[10px] text-slate-600">Project LOOP Platform v2.4 • Anthropic Claude 3.5 Sonnet</p>
         </div>
       </div>
     </div>
@@ -143,7 +230,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-500 text-xs animate-pulse">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-500 text-xs animate-pulse font-mono">
         Loading authentication...
       </div>
     }>
