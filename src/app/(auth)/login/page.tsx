@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Layers, Mail, Lock, Sparkles, ShieldCheck, UserCheck, Eye, ArrowRight } from "lucide-react";
+import { ArrowLeft, Layers, Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -23,12 +23,6 @@ function LoginForm() {
       setSuccess("Account created successfully! Please log in.");
     }
   }, [searchParams]);
-
-  // Quick preset demo login
-  const handleQuickLogin = (email: string) => {
-    setFormData({ email, password: "Password123" });
-    setError("");
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,46 +91,6 @@ function LoginForm() {
               <p className="text-xs text-slate-400 font-medium mt-1">
                 AI Customer Feedback Intelligence Platform
               </p>
-            </div>
-          </div>
-
-          {/* 1-Click Demo Account Quick Login Section */}
-          <div className="mt-6 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-2">
-            <div className="flex items-center justify-between px-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Sparkles className="h-3 w-3 text-amber-400" />
-                1-Click Demo Accounts
-              </span>
-              <span className="text-[10px] text-slate-500">Tap to auto-fill</span>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 pt-1">
-              <button
-                type="button"
-                onClick={() => handleQuickLogin("admin@loop.com")}
-                className="flex flex-col items-center justify-center p-2 rounded-xl border border-purple-500/20 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 hover:border-purple-500/40 transition active:scale-95 group"
-              >
-                <ShieldCheck className="h-4 w-4 mb-1 text-purple-400 group-hover:scale-110 transition-transform" />
-                <span className="text-[11px] font-bold">ADMIN</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickLogin("analyst@loop.com")}
-                className="flex flex-col items-center justify-center p-2 rounded-xl border border-indigo-500/20 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 hover:border-indigo-500/40 transition active:scale-95 group"
-              >
-                <UserCheck className="h-4 w-4 mb-1 text-indigo-400 group-hover:scale-110 transition-transform" />
-                <span className="text-[11px] font-bold">ANALYST</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickLogin("viewer@loop.com")}
-                className="flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700/60 bg-slate-800/40 hover:bg-slate-800/80 text-slate-300 hover:border-slate-600 transition active:scale-95 group"
-              >
-                <Eye className="h-4 w-4 mb-1 text-slate-400 group-hover:scale-110 transition-transform" />
-                <span className="text-[11px] font-bold">VIEWER</span>
-              </button>
             </div>
           </div>
 
